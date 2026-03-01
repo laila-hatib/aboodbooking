@@ -22,7 +22,7 @@ def setup_django():
     sys.path.append(BASE_DIR)
     
     # Set Django settings module
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'TaxPayProject.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'aboud_bus.settings')
     
     # Setup Django
     django.setup()
@@ -36,9 +36,9 @@ def create_superuser():
     User = get_user_model()
     
     # Get credentials from environment variables (Render's environment)
-    username = os.environ.get('DJANGO_SUPERUSER_USERNAME', 'ibrahim')
-    email = os.environ.get('DJANGO_SUPERUSER_EMAIL', 'ibrakhamis02@gmail.com')
-    password = os.environ.get('DJANGO_SUPERUSER_PASSWORD', 'ibra1234')
+    username = os.environ.get('DJANGO_SUPERUSER_USERNAME', 'laia')
+    email = os.environ.get('DJANGO_SUPERUSER_EMAIL', 'admin@gmail.com')
+    password = os.environ.get('DJANGO_SUPERUSER_PASSWORD', '1234')
     
     # If no password in env, check if we should generate one
     if not password:
