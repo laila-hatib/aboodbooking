@@ -1,0 +1,22 @@
+# Core Django
+Django==4.2.7
+djangorestframework==3.14.0
+django-cors-headers==4.3.1
+
+# Authentication
+djangorestframework-simplejwt==5.3.0
+
+# Database
+# psycopg2-binary==2.9.7  # PostgreSQL for production
+python-dotenv==1.0.0
+
+# PDF Generation
+WeasyPrint==59.0
+Pillow==10.0.1
+
+# Production server
+gunicorn==21.2.0
+whitenoise==6.5.0
+
+# Development
+# sqlite3  # Built into Python

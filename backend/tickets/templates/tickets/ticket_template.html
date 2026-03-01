@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Bus Ticket - {{ ticket.ticket_number }}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1cm;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .ticket {
+            background: white;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .company-name {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1976d2;
+            margin: 0;
+        }
+        .ticket-type {
+            font-size: 18px;
+            color: #666;
+            margin: 5px 0 0 0;
+        }
+        .ticket-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .info-section {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin: 0 0 10px 0;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #555;
+        }
+        .info-value {
+            color: #333;
+        }
+        .journey-details {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .route {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1976d2;
+            margin: 0 0 10px 0;
+        }
+        .datetime {
+            font-size: 16px;
+            color: #666;
+            margin: 5px 0;
+        }
+        .seat-info {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0;
+        }
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4caf50;
+            margin: 15px 0 0 0;
+        }
+        .footer {
+            text-align: center;
+            border-top: 2px solid #333;
+            padding-top: 20px;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #666;
+        }
+        .barcode {
+            text-align: center;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 24px;
+            letter-spacing: 2px;
+            background: #f0f0f0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .important-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 12px;
+            color: #856404;
+        }
+        .important-notice h4 {
+            margin: 0 0 10px 0;
+            color: #856404;
+        }
+        .important-notice ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .important-notice li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="ticket">
+        <div class="header">
+            <h1 class="company-name">ABOUD BUS</h1>
+            <p class="ticket-type">OFFICIAL TICKET</p>
+        </div>
+
+        <div class="ticket-info">
+            <div class="info-section">
+                <h3 class="section-title">Passenger Information</h3>
+                <div class="info-row">
+                    <span class="info-label">Name:</span>
+                    <span class="info-value">{{ passenger_name }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Ticket No:</span>
+                    <span class="info-value">{{ ticket.ticket_number }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Booking Ref:</span>
+                    <span class="info-value">{{ booking_reference }}</span>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3 class="section-title">Journey Details</h3>
+                <div class="info-row">
+                    <span class="info-label">Bus:</span>
+                    <span class="info-value">{{ bus_title }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Route:</span>
+                    <span class="info-value">{{ route }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Date:</span>
+                    <span class="info-value">{{ travel_date }}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Departure:</span>
+                    <span class="info-value">{{ departure_time }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="journey-details">
+            <div class="route">{{ route }}</div>
+            <div class="datetime">{{ travel_date }} at {{ departure_time }}</div>
+            <div class="seat-info">{{ seat_count }} Seat{{ seat_count|pluralize }}</div>
+            <div class="price">TZS {{ total_paid }}</div>
+        </div>
+
+        <div class="barcode">
+            {{ ticket.ticket_number }}
+        </div>
+
+        <div class="important-notice">
+            <h4>IMPORTANT INFORMATION:</h4>
+            <ul>
+                <li>Please arrive at the departure point 30 minutes before departure time</li>
+                <li>Bring a valid ID for verification</li>
+                <li>This ticket is non-transferable and valid only for the specified date and time</li>
+                <li>Keep this ticket safe throughout your journey</li>
+                <li>No refund will be provided for lost or damaged tickets</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            <p>This is an official Aboud Bus ticket. For inquiries, call our customer service.</p>
+            <p>Generated on: {% now "Y-m-d H:i:s" %}</p>
+        </div>
+    </div>
+</body>
+</html>
